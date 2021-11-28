@@ -1,0 +1,39 @@
+.main-header-section{
+    background-color: rgb(32, 32, 32);
+    margin: -1px;
+}
+.main-header-text{
+    color: rgb(200, 186, 57);
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    font-size: 100px;
+    text-align: center;
+    padding-top: 50px;
+    padding-bottom: 50px; 
+    margin: -1px;
+}
+.score-section{
+    background-color: rgb(47, 47, 47);
+    margin: -1px;
+}
+.score-section-paragraph{
+    margin: -1px;
+    color: rgb(200, 186, 57);
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    font-size: 100px;
+    text-align: center;
+    padding-top: 50px;
+    padding-bottom: 50px; 
+}
+.score-section-counter{
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    font-size: 170px;
+    color: rgb(172, 170, 61); 
+    margin: -1px;
+}
+.question-answer-section{
+    display: flex;
+    flex-direction: column;
+    margin: -1px;
+    background-color: rgb(14, 14, 14);
+    color: rgb(200, 186, 57);
+}
