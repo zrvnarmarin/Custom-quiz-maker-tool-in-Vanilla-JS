@@ -37,6 +37,11 @@ function SetQuestion(item, i)
     item.textContent = questionsArray[i].question
 }
 
+function SetAnswers(item, i)
+{
+    
+}
+
 function SetQuestionParagraphAttributes(item) 
 {
     
@@ -55,7 +60,16 @@ function SetAnswerLabelAttributes(item)
     //setanje odgovora
     item.textContent = 'prvi odgovor'
 }
-////////////////////////////////////////////////////////////////////////////
+
+function SetAnswerAttributes(answer)
+{
+    if ( answer.type === 'input')
+    SetAnswerInputAttributes(answer.element)
+    
+    if ( answer.type === 'label')
+    SetAnswerLabelAttributes(answer.element)
+}
+
 function CreateAnswerBlueprint()
 {
     const answersBlueprint = [
@@ -72,37 +86,27 @@ function CreateAnswerBlueprint()
     return answersBlueprint
 }
 
-function SetAnswerAttributes(answer)
-{
-    if ( answer.type === 'input')
-    SetAnswerInputAttributes(answer.element)
-
-    if ( answer.type === 'label')
-    SetAnswerLabelAttributes(answer.element)
-}
-
-CreateAnswerBlueprint().forEach((item, i) => {
-    SetAnswerAttributes(item)
-    console.log(item.element, i)
-})
-
-answerArray.forEach((answer, index) => {
+//Answer section
+const answers = answerArray.map((answer, index) => {
 
     const section = document.createElement('div')
     section.classList.add('answerSection')
-    section.style.backgroundColor = 'green'
+    section.style.backgroundColor = 'crimson'
+    section.style.display = 'block'
 
     const blueprint = CreateAnswerBlueprint()
-    
 
-    //console.log(AnswerBlueprint())
-    section.append(blueprint)
-    console.log(blueprint)
+    blueprint.forEach((item, index) => {
+
+        SetAnswerAttributes(item)
+        section.append(item.element)
+    })
+    
     questionAnswerForm.append(section)
 })
 
 //Question section
-questionsArray.forEach((question, index) => {
+const question = questionsArray.map((question, index) => {
 
     const section = document.createElement('div')
     section.classList.add('questionSection')
@@ -111,8 +115,6 @@ questionsArray.forEach((question, index) => {
     const questionAndAnswers = [
         {type: 'paragraph', element: document.createElement('p')},
     ]
-
-    //console.log(section)
         
     questionAndAnswers.forEach(item => {
         if (item.type === 'paragraph') {
