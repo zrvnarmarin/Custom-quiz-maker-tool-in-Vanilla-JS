@@ -37,14 +37,13 @@ function SetQuestion(item, i)
     item.textContent = questionsArray[i].question
 }
 
-function SetAnswers(item, i)
-{
-    
-}
+const allAnswers = answerArray.map(element => [...element.falseAnswers, element.trueAnswer])
+const IsLabel = (item) => item.type ==='label' ? true : false
+
 
 function SetQuestionParagraphAttributes(item) 
 {
-    
+    item.style.paddingTop = '20px'
 }
 
 function SetAnswerInputAttributes(item)
@@ -82,53 +81,74 @@ function CreateAnswerBlueprint()
         {type: 'input', element: document.createElement('input')},
         {type: 'label', element: document.createElement('label')},
     ]
-
+    
     return answersBlueprint
 }
 
+const answerSection = []
+const answerLabels = []
 //Answer section
-const answers = answerArray.map((answer, index) => {
-
+answerArray.forEach((answer, index) => {
+    
     const section = document.createElement('div')
     section.classList.add('answerSection')
     section.style.backgroundColor = 'crimson'
     section.style.display = 'block'
-
+    
     const blueprint = CreateAnswerBlueprint()
-
+    
     blueprint.forEach((item, index) => {
-
+        IsLabel(item) ? answerLabels.push(item) : false
         SetAnswerAttributes(item)
         section.append(item.element)
     })
     
+    answerSection.push(section) 
+    
     questionAnswerForm.append(section)
 })
 
-//Question section
-const question = questionsArray.map((question, index) => {
 
+const questionSection = []
+//Question section
+questionsArray.forEach((question, index) => {
+    
     const section = document.createElement('div')
     section.classList.add('questionSection')
     section.style.backgroundColor = 'yellow'
-
+    
     const questionAndAnswers = [
         {type: 'paragraph', element: document.createElement('p')},
     ]
-        
+    
     questionAndAnswers.forEach(item => {
         if (item.type === 'paragraph') {
             SetQuestionParagraphAttributes(item.element)
             SetQuestion(item.element, index)
         }
-
+        
         section.append(item.element)
     })
-
+    
+    questionSection.push(section)
+    
     questionAnswerForm.append(section)
 })
 
+//Nesting answer section inside question section
+const questionAndAnswerMerge = questionSection.map((element, i) => element.append(answerSection[i]));
 
+
+const allAnswersConcatenated = []
+allAnswers.forEach(element => {
+    element.forEach(item => {
+        allAnswersConcatenated.push(item)
+    })
+})
+
+
+console.log(allAnswersConcatenated)
+console.log(answerLabels)
 
 
 
