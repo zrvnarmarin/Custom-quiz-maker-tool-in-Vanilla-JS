@@ -1,0 +1,19 @@
+{
+  "users": [
+    
+  ],
+  "algebraUser": [
+    {
+      "ime": "marin",
+      "id": 0
+    },
+    {
+      "ime": "balan",
+      "id": 1
+    },
+    {
+      "ime": "barosini",
+      "id": 2
+    }
+  ]
+}
