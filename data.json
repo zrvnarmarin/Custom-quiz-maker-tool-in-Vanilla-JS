@@ -1,6 +1,35 @@
 {
   "users": [
-    
+    {
+      "ime": "penis",
+      "prezime": "dautovic",
+      "id": 1
+    },
+    {
+      "ime": "penis",
+      "prezime": "dautovic",
+      "id": 2
+    },
+    {
+      "ime": "penis",
+      "prezime": "dautovic",
+      "id": 3
+    },
+    {
+      "ime": "penis",
+      "prezime": "dautovic",
+      "id": 4
+    },
+    {
+      "ime": "penis",
+      "prezime": "dautovic",
+      "id": 5
+    },
+    {
+      "ime": "penis",
+      "prezime": "dautovic",
+      "id": 6
+    }
   ],
   "algebraUser": [
     {

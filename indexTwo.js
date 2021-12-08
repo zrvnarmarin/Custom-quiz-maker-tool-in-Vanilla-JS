@@ -53,7 +53,7 @@ function Postdata()
         
     })
 
-    request.send(JSON.stringify({ime : 'penis', prezime: 'dautovic', id: 1}))
+    request.send(JSON.stringify({ime : 'penis', prezime: 'dautovic'}))
 }
 
-//Postdata()
+Postdata()
