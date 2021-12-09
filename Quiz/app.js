@@ -92,15 +92,25 @@ function CreateAnswerBlueprint()
     return answersBlueprint
 }
 
+function CreateQuestionBlueprint()
+{
+    const questionBlueprint = [
+        {type: 'paragraph', element: document.createElement('p')}
+    ]
+
+    return questionBlueprint
+}
+
 const answerSection = []
 const answerLabels = []
+
+
 //Answer section
 answerArray.forEach((answer, index) => {
     
     const section = document.createElement('div')
-    section.classList.add('answerSection')
-    section.style.backgroundColor = 'crimson'
-    section.style.display = 'block'
+    SetSectionClass(section, 'answerSection')
+    SetAnswerSectionAttributes(section)
     
     const blueprint = CreateAnswerBlueprint()
     
@@ -115,20 +125,34 @@ answerArray.forEach((answer, index) => {
     questionAnswerForm.append(section)
 })
 
+function SetSectionClass(section, className)
+{
+    section.classList.add(className)
+}
+
+function SetAnswerSectionAttributes(section)
+{
+    section.style.backgroundColor = 'crimson'
+    section.style.display = 'block'
+}
+
+function SetQuestionSectionAttributes(section)
+{
+    section.style.backgroundColor = 'yellow'
+}
+
 
 const questionSection = []
 //Question section
 questionsArray.forEach((question, index) => {
     
     const section = document.createElement('div')
-    section.classList.add('questionSection')
-    section.style.backgroundColor = 'yellow'
+    SetSectionClass(section, 'questionSection')
+    SetQuestionSectionAttributes(section)
     
-    const questionAndAnswers = [
-        {type: 'paragraph', element: document.createElement('p')},
-    ]
+    const blueprint = CreateQuestionBlueprint()
     
-    questionAndAnswers.forEach(item => {
+    blueprint.forEach(item => {
         if (item.type === 'paragraph') {
             SetQuestionParagraphAttributes(item.element)
             SetQuestion(item.element, index)
@@ -146,9 +170,7 @@ questionsArray.forEach((question, index) => {
 const questionAndAnswerMerge = questionSection.map((element, i) => element.append(answerSection[i]));
 
 
-answerLabels.forEach((element, index) => {
-    element.textContent = allAnswersConcatenated[index]
-})
+
 
 
 
