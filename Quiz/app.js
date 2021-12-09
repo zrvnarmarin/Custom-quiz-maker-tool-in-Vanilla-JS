@@ -30,51 +30,11 @@ counterSpan.classList.toggle('score-section-counter')
 //Questions/Answers section
 const questionAndAnswersSection = document.createElement('div')
 const questionAnswerForm = document.createElement('form')
-questionAndAnswersSection.classList.toggle('question-answer-section')
-
-function SetQuestion(item, i)
-{
-    item.textContent = questionsArray[i].question
-}
 
 const allAnswers = answerArray.map(element => [...element.falseAnswers, element.trueAnswer])
 const allAnswersConcatenated = Array.prototype.concat.apply([], allAnswers)
 
-const IsLabel = (item) => item.type ==='label' ? true : false
-
-function SetQuestionParagraphAttributes(item) 
-{
-    item.style.paddingTop = '20px'
-}
-
-function SetAnswerInputAttributes(item)
-{
-    item.setAttribute('type', 'radio')
-    item.setAttribute('id', 'nesto')
-    item.setAttribute('value', 'nesto')
-}
-
-function SetAnswersTextContent(item)
-{
-    answerLabels.forEach((element, index) => {
-        item.textContent = allAnswersConcatenated[index]
-    })
-}
-
-function SetAnswerLabelAttributes(item)
-{
-    item.setAttribute('for', 'nesto') 
-    SetAnswersTextContent(item)
-}
-
-function SetAnswerAttributes(answer)
-{
-    if ( answer.type === 'input')
-    SetAnswerInputAttributes(answer.element)
-    
-    if ( answer.type === 'label')
-    SetAnswerLabelAttributes(answer.element)
-}
+questionAndAnswersSection.classList.toggle('question-answer-section')
 
 function CreateAnswerBlueprint()
 {
@@ -101,9 +61,49 @@ function CreateQuestionBlueprint()
     return questionBlueprint
 }
 
+function SetQuestion(item, i)
+{
+    item.textContent = questionsArray[i].question
+}
+
+function SetQuestionParagraphAttributes(item) 
+{
+    item.style.paddingTop = '20px'
+}
+
+const IsLabel = (item) => item.type ==='label' ? true : false
+
+function SetAnswersTextContent(item)
+{
+    answerLabels.forEach((element, index) => {
+        item.textContent = allAnswersConcatenated[index]
+    })
+}
+
+function SetAnswerInputAttributes(item)
+{
+    item.setAttribute('type', 'radio')
+    item.setAttribute('id', 'nesto')
+    item.setAttribute('value', 'nesto')
+}
+
+function SetAnswerLabelAttributes(item)
+{
+    item.setAttribute('for', 'nesto') 
+    SetAnswersTextContent(item)
+}
+
+function SetAnswerAttributes(answer)
+{
+    if ( answer.type === 'input')
+    SetAnswerInputAttributes(answer.element)
+    
+    if ( answer.type === 'label')
+    SetAnswerLabelAttributes(answer.element)
+}
+
 const answerSection = []
 const answerLabels = []
-
 
 //Answer section
 answerArray.forEach((answer, index) => {
