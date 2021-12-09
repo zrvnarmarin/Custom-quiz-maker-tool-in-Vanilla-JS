@@ -38,8 +38,9 @@ function SetQuestion(item, i)
 }
 
 const allAnswers = answerArray.map(element => [...element.falseAnswers, element.trueAnswer])
-const IsLabel = (item) => item.type ==='label' ? true : false
+const allAnswersConcatenated = Array.prototype.concat.apply([], allAnswers)
 
+const IsLabel = (item) => item.type ==='label' ? true : false
 
 function SetQuestionParagraphAttributes(item) 
 {
@@ -53,11 +54,17 @@ function SetAnswerInputAttributes(item)
     item.setAttribute('value', 'nesto')
 }
 
+function SetAnswersTextContent(item)
+{
+    answerLabels.forEach((element, index) => {
+        item.textContent = allAnswersConcatenated[index]
+    })
+}
+
 function SetAnswerLabelAttributes(item)
 {
     item.setAttribute('for', 'nesto') 
-    //setanje odgovora
-    item.textContent = 'prvi odgovor'
+    SetAnswersTextContent(item)
 }
 
 function SetAnswerAttributes(answer)
@@ -139,16 +146,11 @@ questionsArray.forEach((question, index) => {
 const questionAndAnswerMerge = questionSection.map((element, i) => element.append(answerSection[i]));
 
 
-const allAnswersConcatenated = []
-allAnswers.forEach(element => {
-    element.forEach(item => {
-        allAnswersConcatenated.push(item)
-    })
+answerLabels.forEach((element, index) => {
+    element.textContent = allAnswersConcatenated[index]
 })
 
 
-console.log(allAnswersConcatenated)
-console.log(answerLabels)
 
 
 
