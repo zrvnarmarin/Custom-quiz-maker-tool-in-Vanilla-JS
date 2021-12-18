@@ -68,11 +68,6 @@ function CreateAnswerBlueprint()
     return answersBlueprint
 }
 
-function Test()
-{
-    
-}
-
 function CreateQuestionBlueprint()
 {
     const questionBlueprint = [
@@ -103,27 +98,15 @@ function SetAnswersTextContent(item)
     })
 }
 
-function CreateNumberForIdAttribute()
-{
-    const idStrings = ["first", "second", "third", "fourth"]
-
-    return idStrings
-}
-
-function IterateThroughNumbersForIdAttributes()
-{
-    let counter = 0
-    CreateNumberForIdAttribute().forEach(element => {
-        counter +=1
-    })
-
-    return counter
-}
-
 function SetAnswerInputAttributes(item)
 {
+    const array = ['first', 'second', 'third', 'fourth']
+
+        array.map((element, index) => {
+        item.setAttribute('id', `${++index} answer`)
+    })
+
     item.setAttribute('type', 'radio')
-    item.setAttribute('id', `${CreateNumberForIdAttribute()[0]} question`) // first question, second question, third question, fourth question
     item.setAttribute('value', 'nesto')
 }
 
@@ -144,6 +127,15 @@ function SetAnswerAttributes(answer)
 
 const answerSection = []
 const answerLabels = []
+const answerInputs = []
+
+const numbers = [1,2,3,4,5,6,7,8]
+
+const Every_nthElement = (arr, nth) => arr.filter((e, i) => i % nth === nth - 1);
+console.log(Every_nthElement(numbers, 4))
+console.log(answerInputs)
+
+
 //Answer section
 answerArray.forEach((answer, index) => {
     
@@ -152,9 +144,11 @@ answerArray.forEach((answer, index) => {
     SetAnswerSectionAttributes(section)
     
     const blueprint = CreateAnswerBlueprint()
+    console.log(blueprint)
     
     blueprint.forEach((item, index) => {
         IsLabel(item) ? answerLabels.push(item) : false
+        IsInput(item) ? answerInputs.push(item) : false
         SetAnswerAttributes(item)
         section.append(item.element)
     })
@@ -189,6 +183,8 @@ questionsArray.forEach((question, index) => {
 
 //Nesting answer section inside question section
 const questionAndAnswerMerge = questionSection.map((element, i) => element.append(answerSection[i]));
+
+
 
 
 
