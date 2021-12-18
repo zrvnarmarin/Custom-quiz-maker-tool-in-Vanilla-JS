@@ -129,12 +129,7 @@ const answerSection = []
 const answerLabels = []
 const answerInputs = []
 
-const numbers = [1,2,3,4,5,6,7,8]
-
 const Every_nthElement = (arr, nth) => arr.filter((e, i) => i % nth === nth - 1);
-console.log(Every_nthElement(numbers, 4))
-console.log(answerInputs)
-
 
 //Answer section
 answerArray.forEach((answer, index) => {
