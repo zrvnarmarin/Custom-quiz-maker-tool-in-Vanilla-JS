@@ -34,6 +34,22 @@ const questionAnswerForm = document.createElement('form')
 const allAnswers = answerArray.map(element => [...element.falseAnswers, element.trueAnswer])
 const allAnswersConcatenated = Array.prototype.concat.apply([], allAnswers)
 
+function SetSectionClass(section, className)
+{
+    section.classList.add(className)
+}
+
+function SetAnswerSectionAttributes(section)
+{
+    section.style.backgroundColor = 'crimson'
+    section.style.display = 'block'
+}
+
+function SetQuestionSectionAttributes(section)
+{
+    section.style.backgroundColor = 'yellow'
+}
+
 questionAndAnswersSection.classList.toggle('question-answer-section')
 
 function CreateAnswerBlueprint()
@@ -50,6 +66,11 @@ function CreateAnswerBlueprint()
     ]
     
     return answersBlueprint
+}
+
+function Test()
+{
+    
 }
 
 function CreateQuestionBlueprint()
@@ -72,6 +93,8 @@ function SetQuestionParagraphAttributes(item)
 }
 
 const IsLabel = (item) => item.type ==='label' ? true : false
+const IsInput = (item) => item.type ==='input' ? true : false
+const IsParagraph = (item) => item.type ==='paragraph' ? true : false
 
 function SetAnswersTextContent(item)
 {
@@ -80,10 +103,27 @@ function SetAnswersTextContent(item)
     })
 }
 
+function CreateNumberForIdAttribute()
+{
+    const idStrings = ["first", "second", "third", "fourth"]
+
+    return idStrings
+}
+
+function IterateThroughNumbersForIdAttributes()
+{
+    let counter = 0
+    CreateNumberForIdAttribute().forEach(element => {
+        counter +=1
+    })
+
+    return counter
+}
+
 function SetAnswerInputAttributes(item)
 {
     item.setAttribute('type', 'radio')
-    item.setAttribute('id', 'nesto')
+    item.setAttribute('id', `${CreateNumberForIdAttribute()[0]} question`) // first question, second question, third question, fourth question
     item.setAttribute('value', 'nesto')
 }
 
@@ -104,7 +144,6 @@ function SetAnswerAttributes(answer)
 
 const answerSection = []
 const answerLabels = []
-
 //Answer section
 answerArray.forEach((answer, index) => {
     
@@ -121,25 +160,8 @@ answerArray.forEach((answer, index) => {
     })
     
     answerSection.push(section) 
-    
     questionAnswerForm.append(section)
 })
-
-function SetSectionClass(section, className)
-{
-    section.classList.add(className)
-}
-
-function SetAnswerSectionAttributes(section)
-{
-    section.style.backgroundColor = 'crimson'
-    section.style.display = 'block'
-}
-
-function SetQuestionSectionAttributes(section)
-{
-    section.style.backgroundColor = 'yellow'
-}
 
 
 const questionSection = []
@@ -153,7 +175,7 @@ questionsArray.forEach((question, index) => {
     const blueprint = CreateQuestionBlueprint()
     
     blueprint.forEach(item => {
-        if (item.type === 'paragraph') {
+        if (IsParagraph(item)) {
             SetQuestionParagraphAttributes(item.element)
             SetQuestion(item.element, index)
         }
@@ -162,7 +184,6 @@ questionsArray.forEach((question, index) => {
     })
     
     questionSection.push(section)
-    
     questionAnswerForm.append(section)
 })
 
